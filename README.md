@@ -1,2 +1,1 @@
-# interview-etoro-helm-charts
-Helm charts
+Helm charts for the simple web app
