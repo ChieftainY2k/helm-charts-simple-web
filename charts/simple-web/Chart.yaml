@@ -2,6 +2,6 @@ apiVersion: v2
 name: simple-web
 description: A Helm chart for Kubernetes Simple Web App
 type: application
-version: 0.1.3
+version: 0.1.4
 appVersion: "1.0.0"
 icon: https://helm.sh/img/helm.svg
