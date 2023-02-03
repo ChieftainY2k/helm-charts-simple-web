@@ -64,6 +64,7 @@ resources:
      cpu: 100m
      memory: 64Mi
 
+# for HorizontalPodAutoscaler
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -71,8 +72,18 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+# for KEDA scaling
+kedaScaling:
+  enabled: true
+  cpuAverageValue: 80
+  memoryAverageValue: 80
+  cooldownPeriod: 120
+  minReplicaCount: 1
+  maxReplicaCount: 3
+
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+

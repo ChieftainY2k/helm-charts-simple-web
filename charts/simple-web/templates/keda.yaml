@@ -1,0 +1,21 @@
+{{- if .Values.kedaScaling.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "simple-web.fullname" . }}-scaler
+spec:
+  scaleTargetRef:
+    name: {{ include "simple-web.fullname" . }}
+  cooldownPeriod: {{ .Values.kedaScaling.cooldownPeriod }}
+  minReplicaCount: {{ .Values.kedaScaling.minReplicaCount }}
+  maxReplicaCount: {{ .Values.kedaScaling.maxReplicaCount}}
+  triggers:
+    - type: cpu
+      metadata:
+        type: AverageValue
+        value: {{ .Values.kedaScaling.cpuAverageValue }}
+    - type: memory
+      metadata:
+        type: AverageValue
+        value: {{ .Values.kedaScaling.memoryAverageValue }}
+{{- end }}
