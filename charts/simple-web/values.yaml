@@ -57,12 +57,12 @@ ingress:
   #      - chart-example.local
 
 resources:
-   limits:
-     cpu: 100m
-     memory: 64Mi
-   requests:
-     cpu: 100m
-     memory: 64Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+   cpu: 300m
+   memory: 128Mi
 
 # for HorizontalPodAutoscaler
 autoscaling:
