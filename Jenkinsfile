@@ -5,33 +5,58 @@
 
 pipeline {
     agent any //@FIXME use worker node labels to pick workers with helm installed and k8s access configured.
-    
+
     parameters {
-        choice(choices: ['install/upgrade', 'delete'], name: 'action')
+        choice(choices: ['install', 'delete'], name: 'action')
     }
-    
+
+    options {
+        //prevent from concurrent runs (alternatively use lock(resource: 'simple-web-app-deployment') for more control)
+        disableConcurrentBuilds()
+    }
+
     stages {
-        stage('Deploy or delete from cluster') {
+        stage('Add Helm repository') {
+            when {
+                expression { params.action == 'install' }
+            }
             steps {
-                //concurrency control
-                lock('kubernetes-cluster') {
-                    withKubeConfig([credentialsId: 'kubeconfig',
-                                    //serverUrl: 'https://kubernetes.cluster.local', //@FIXME serverUrl is optional
-                                    namespace: 'tomasz']) {
-                        if (params.action == 'install') {
-                            //add a repository or silentyluy fail if already added
-                            sh 'helm repo add simple-web https://chieftainy2k.github.io/helm-charts-simple-web || true'
-                            //update repository
-                            sh 'helm repo update'
-                            //upgrade or install the app
-                            sh 'helm upgrade --install --wait --timeout simple-web simple-web/simple-web'
-                            //test the deployment
-                            sh 'helm test simple-web'
-                        } else if (params.action == 'delete') {
-                            //delete the app
-                            sh 'helm uninstall --wait simple-web'
-                        }
-                    }
+                //add a repository , ignore errors at this point (such as repo already added)
+                sh 'helm repo add simple-web https://chieftainy2k.github.io/helm-charts-simple-web || true'
+            }
+        }
+    }
+
+    stages {
+        stage('Deploy from cluster') {
+            when {
+                expression { params.action == 'install' }
+            }
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig', namespace: 'tomasz']) {
+                    sh 'helm upgrade --install simple-web simple-web/simple-web --wait'
+                }
+            }
+        }
+
+        stage('Test the app') {
+            when {
+                expression { params.action == 'install' }
+            }
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig', namespace: 'tomasz']) {
+                    sh 'helm test simple-web --wait'
+                }
+            }
+        }
+
+        stage('Delete from cluster') {
+            when {
+                expression { params.action == 'delete' }
+            }
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig', namespace: 'tomasz']) {
+                    sh 'helm delete simple-web --wait'
                 }
             }
         }
