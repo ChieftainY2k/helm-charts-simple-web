@@ -13,9 +13,9 @@ spec:
     - type: cpu
       metadata:
         type: AverageValue
-        value: {{ .Values.kedaScaling.cpuAverageValue }}
+        value: "{{ .Values.kedaScaling.cpuAverageValue }}"
     - type: memory
       metadata:
         type: AverageValue
-        value: {{ .Values.kedaScaling.memoryAverageValue }}
+        value: "{{ .Values.kedaScaling.memoryAverageValue }}"
 {{- end }}
