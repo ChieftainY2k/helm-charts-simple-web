@@ -75,8 +75,10 @@ autoscaling:
 # for KEDA scaling
 kedaScaling:
   enabled: true
-  cpuAverageValue: 80
-  memoryAverageValue: 80
+  cpuMetricType: Utilization
+  cpuValue: 80
+  memoryMetricType: Utilization
+  memoryValue: 80
   cooldownPeriod: 120
   minReplicaCount: 1
   maxReplicaCount: 3

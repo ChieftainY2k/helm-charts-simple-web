@@ -12,10 +12,10 @@ spec:
   triggers:
     - type: cpu
       metadata:
-        type: AverageValue
-        value: "{{ .Values.kedaScaling.cpuAverageValue }}"
+        type: {{ .Values.kedaScaling.cpuMetricType }}
+        value: "{{ .Values.kedaScaling.cpuValue}}"
     - type: memory
       metadata:
-        type: AverageValue
-        value: "{{ .Values.kedaScaling.memoryAverageValue }}"
+        type: {{ .Values.kedaScaling.memoryMetricType }}
+        value: "{{ .Values.kedaScaling.memoryValue }}"
 {{- end }}
