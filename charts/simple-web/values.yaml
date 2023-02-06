@@ -79,12 +79,12 @@ kedaScaling:
     enabled: true
     metadata:
       type: Utilization
-      value: 80
+      value: "80"
   memory:
     enabled: true
     metadata:
       type: Utilization
-      value: 80
+      value: "80"
   cron:
     enabled: true
     metadata:
