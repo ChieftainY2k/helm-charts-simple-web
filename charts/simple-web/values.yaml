@@ -87,10 +87,11 @@ kedaScaling:
       value: 80
   cron:
     enabled: true
-    timezone: "Poland/Warsaw"
-    start: "0 8 * * *"
-    end: "0 12 * * *"
-    desiredReplicas: 3
+    metadata:
+      timezone: "Poland/Warsaw"
+      start: "0 8 * * *"
+      end: "0 12 * * *"
+      desiredReplicas: 3
   cooldownPeriod: 120
   minReplicaCount: 1
   maxReplicaCount: 3

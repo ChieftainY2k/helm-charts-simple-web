@@ -13,16 +13,16 @@ spec:
     {{- if .Values.kedaScaling.cpu.enabled }}
     - type: cpu
       metadata:
-        {{- toYaml .Values.kedaScaling.cpu | nindent 8 }}
+        {{- toYaml .Values.kedaScaling.cpu.metadata | nindent 8 }}
     {{- end }}
     {{- if .Values.kedaScaling.memory.enabled }}
     - type: memory
       metadata:
-        {{- toYaml .Values.kedaScaling.memory | nindent 8 }}
+        {{- toYaml .Values.kedaScaling.memory.metadata | nindent 8 }}
     {{- end }}
     {{- if .Values.kedaScaling.cron.enabled }}
     - type: cron
       metadata:
-        {{- toYaml .Values.kedaScaling.cron | nindent 8 }}
+        {{- toYaml .Values.kedaScaling.cron.metadata | nindent 8 }}
     {{- end }}
 {{- end }}
