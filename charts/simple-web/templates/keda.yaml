@@ -10,12 +10,19 @@ spec:
   minReplicaCount: {{ .Values.kedaScaling.minReplicaCount }}
   maxReplicaCount: {{ .Values.kedaScaling.maxReplicaCount}}
   triggers:
+    {{- if .Values.kedaScaling.cpu.enabled }}
     - type: cpu
       metadata:
-        type: {{ .Values.kedaScaling.cpuMetricType }}
-        value: "{{ .Values.kedaScaling.cpuValue}}"
+        {{- toYaml .Values.kedaScaling.cpu | nindent 8 }}
+    {{- end }}
+    {{- if .Values.kedaScaling.memory.enabled }}
     - type: memory
       metadata:
-        type: {{ .Values.kedaScaling.memoryMetricType }}
-        value: "{{ .Values.kedaScaling.memoryValue }}"
+        {{- toYaml .Values.kedaScaling.memory | nindent 8 }}
+    {{- end }}
+    {{- if .Values.kedaScaling.cron.enabled }}
+    - type: cron
+      metadata:
+        {{- toYaml .Values.kedaScaling.cron | nindent 8 }}
+    {{- end }}
 {{- end }}
