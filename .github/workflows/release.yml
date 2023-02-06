@@ -29,7 +29,7 @@ jobs:
 
       - name: Lint Helm Charts
         run: |
-          helm lint .        
+          helm lint charts/simple-web        
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
