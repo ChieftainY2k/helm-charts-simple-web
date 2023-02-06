@@ -3,6 +3,17 @@ entries:
   simple-web:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-02-06T08:42:55.072775246Z"
+    description: A Helm chart for Kubernetes Simple Web App
+    digest: b691f632f8eafef07f763a2d9564f31b3852055ed7432395a51c2fa7b0784015
+    icon: https://helm.sh/img/helm.svg
+    name: simple-web
+    type: application
+    urls:
+    - https://github.com/ChieftainY2k/helm-charts-simple-web/releases/download/simple-web-0.1.10/simple-web-0.1.10.tgz
+    version: 0.1.10
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-02-06T08:37:22.025638475Z"
     description: A Helm chart for Kubernetes Simple Web App
     digest: c24e4ad8ddbfc56cb09c87452c43d9f6d0153771529a9fbf1e6c6e1fc94ac282
@@ -110,4 +121,4 @@ entries:
     urls:
     - https://github.com/ChieftainY2k/helm-charts-simple-web/releases/download/simple-web-0.1.0/simple-web-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-06T08:37:22.025665175Z"
+generated: "2023-02-06T08:42:55.072814048Z"
